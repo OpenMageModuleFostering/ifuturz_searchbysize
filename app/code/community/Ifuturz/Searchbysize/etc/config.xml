@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<Ifuturz_Searchbysize>
-			<version>0.1.0</version>
+			<version>0.4.1</version>
 		</Ifuturz_Searchbysize>
 	</modules>	
 	<frontend>
@@ -63,6 +63,16 @@
 		</layout>		
 	</adminhtml>	
 	<global>
+		<events>
+			<controller_action_predispatch>
+				<observers>
+					<searchbysize_install>
+						<class>Ifuturz_Searchbysize_Model_Observer</class>
+						<method>checkInstallation</method>
+					</searchbysize_install>					
+				</observers>
+			</controller_action_predispatch>
+		</events>
 		<models>
 			<catalogsearch>
                 <rewrite>
