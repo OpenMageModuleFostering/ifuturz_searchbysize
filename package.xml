@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+    <name>Ifuturz_Searchbysize</name>
+    <version>0.1.0</version>
+    <stability>stable</stability>
+    <license uri="http://opensource.org/licenses/osl-3.0.php">OSL v3.0</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Search the product by size that is width, height, depth of the product along with the categories.</summary>
+    <description>This extension allows for a customer to search the products by its size. It is more convenient for the products like Lokcers, benches, tables, cupboard.. In short the product which have a width, height and depth.&#xD;
+ - Search by size will display on right sidebar. Here four drop-down/selection boxes are given to user that is width, depth, height and category to search the products as per their needs. &#xD;
+ - Note that width, depth, heigth box contains only those sizes which are allowed by admin from admin-panel.&#xD;
+</description>
+    <notes>First Search By Size extension</notes>
+    <authors><author><name>Iverve</name><user>iverve</user><email>extension.geek@ifuturz.com</email></author></authors>
+    <date>2014-01-08</date>
+    <time>09:15:02</time>
+    <contents><target name="magecommunity"><dir name="Ifuturz"><dir name="Searchbysize"><dir name="Helper"><file name="Data.php" hash="86b900b274a15cae78c8a18b12a375af"/></dir><dir name="Model"><dir name="CatalogSearch"><file name="Advanced.php" hash="88ff37fd3be7e94d1cde75a8bf9abdd8"/></dir><dir name="Mysql4"><dir name="Searchbysize"><file name="Collection.php" hash="1f7bf17422f73c23468c9750b3496302"/></dir><file name="Searchbysize.php" hash="e6af4293f660e4559d665a92309d4313"/></dir><file name="Searchbysize.php" hash="75770324e1d0dc2bd169af6b1d196550"/></dir><dir name="controllers"><dir name="Adminhtml"><file name="SearchbysizeController.php" hash="93460b96e914994d68ec2228ab46e7a8"/></dir><file name="IndexController.php" hash="aff304f0991b31117a71074192ded694"/></dir><dir name="etc"><file name="config.xml" hash="da282805474221b5b92220d43cd9f766"/></dir><dir name="sql"><dir name="searchbysize_setup"><file name="mysql4-install-0.1.0.php" hash="ed334a44e9afce7f9ff8336998a21a1e"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="adminhtml"><dir name="default"><dir name="default"><dir name="layout"><file name="searchbysize.xml" hash="ae940118e665575d5607aab82c88b202"/></dir><dir name="template"><dir name="searchbysize"><file name="form.phtml" hash="34d52ba21b8216182a58f560ae9f4596"/></dir></dir></dir></dir></dir><dir name="frontend"><dir name="default"><dir name="default"><dir name="layout"><file name="searchbysize.xml" hash="1819e0ece647f8906284dc8d4e32273c"/></dir><dir name="template"><dir name="searchbysize"><dir name="advanced"><file name="searchbysize.phtml" hash="d8c5a2b457e031e27cf0a5abe8ca969b"/></dir></dir></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Ifuturz_Searchbysize.xml" hash="d75111753fee32e0a18812c301d0e165"/></dir></target><target name="mageskin"><dir name="frontend"><dir name="base"><dir name="default"><dir name="css"><file name="searchbysize.css" hash="17d9fa42bc6027e8bb3f4c909f81e20a"/></dir><dir name="images"><file name="searchicon.png" hash="93d958211da51b1797fd7a0b38608e45"/></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.1.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

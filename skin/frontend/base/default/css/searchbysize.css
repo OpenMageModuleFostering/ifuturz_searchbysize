@@ -1,0 +1,18 @@
+.block-title strong
+{
+	background-image: url("../images/searchicon.png");
+	background-repeat:no-repeat;
+}
+.block-new
+{
+	padding-left:15px;
+}
+.block-content select
+{
+	float:right;
+	width:115px;
+}
+.block-content-search
+{
+	padding:10px;	
+}

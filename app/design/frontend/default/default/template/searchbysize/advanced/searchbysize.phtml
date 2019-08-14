@@ -1,0 +1,123 @@
+<div class="block block-list block-searchsize">
+    <div class="block-title">
+        <strong><span class="block-new"><?php echo $this->__('Search By Size') ?></span></strong>
+    </div>
+<?php
+$layer = Mage::getSingleton('catalog/layer');
+$_category = $layer->getCurrentCategory();
+
+$currentCategoryname= $_category->getName();
+$currentCategoryId = $_category->getEntity_id();
+
+$cat_mod = Mage::getModel('catalog/category');
+$helper = new Mage_Catalog_Helper_Category();
+$_main_categories=$helper->getStoreCategories();
+
+$model = Mage::getModel('searchbysize/searchbysize')->getCollection();
+$temp = $model->getData();
+$width = $temp[0]['width'];
+$depth = $temp[0]['depth'];
+$height = $temp[0]['height'];
+
+$ww = explode(',',$width);
+$dd = explode(',',$depth);
+$hh = explode(',',$height);
+
+?>
+     <div class="block-content block-content-search">
+        <form action="<?php echo $this->getUrl().'catalogsearch/advanced/result/'?>" name="searchform" method="get" id="form-validate" onSubmit="return checksearchform()">
+        <fieldset>
+            <ul>
+                <li>
+                    <label for="width">Width&nbsp;</label>
+  	                <select title="width" class="searchsize" id="width" name="width">
+                    <option value=''>-- Select Width --</option>
+                   	<?php foreach($ww as $w):?>
+                       <?php if(isset($_GET['width'])): ?>
+	                       	<?php if($w == $_GET['width']): ?>
+                    		<option value='<?php echo $w; ?>'selected><?php echo $_GET['width']; ?></option>                            
+                       		<?php else: ?>
+                        	<option value='<?php echo $w; ?>'><?php echo $w; ?></option>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <option value='<?php echo $w; ?>'><?php echo $w; ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+					</select>
+                    <br><br>
+                    <label for="depth">Depth&nbsp;</label>
+                    <select title="depth" class="searchsize" id="depth" name="depth">
+                    <option value=''>-- Select Depth --</option>
+
+                   	<?php foreach($dd as $d):?>
+                    	<?php if(isset($_GET['depth'])): ?>
+                        	<?php if($d == $_GET['depth']): ?>
+                    		<option value='<?php echo $d; ?>'selected><?php echo $_GET['depth']; ?></option>
+                       		 <?php else: ?>
+                        	<option value='<?php echo $d; ?>'><?php echo $d; ?></option>
+                             <?php endif; ?>
+                         <?php else: ?>
+                        	<option value='<?php echo $d; ?>'><?php echo $d; ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+					</select>
+                    <br><br>
+                    <label for="height">Height</label>
+                    <select title="height" class="searchsize" id="height" name="height">
+                    <option value=''>-- Select Height --</option>
+
+                   	<?php foreach($hh as $h):?>
+	                    <?php if(isset($_GET['height'])): ?>
+	                        <?php if($h == $_GET['height']): ?>
+    	                	<option value='<?php echo $h; ?>'selected><?php echo $_GET['height']; ?></option>
+	                        <?php else: ?>
+                        	<option value='<?php echo $h; ?>'><?php echo $h; ?></option>
+                         	 <?php endif; ?>
+                        <?php else: ?>
+                        	<option value='<?php echo $h; ?>'><?php echo $h; ?></option>     
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+					</select>
+                    
+                    <br><br>
+                 <label for="category"><?php echo $this->__("Category")?></label>
+                      <select class="searchsize" id="category" name="category">
+                    <option value=''><?php echo $this->__("-Select Category-")?></option>
+                    <?php if ($_main_categories): ?>
+						<?php foreach ($_main_categories as $_main_category): ?>
+                            <?php if($_main_category->getIsActive()): ?>
+                                 <?php  $cid = $_main_category->getId();
+                                   $cur_category = $cat_mod->load($cid); ?>                                   
+                                   <?php $category_name = $cur_category->getName(); ?>
+                                 <option title="<?php echo $category_name; ?>" value='<?php echo $cur_category->getEntity_id(); ?>'<?php if(isset($_GET['category']) && $cur_category->getEntity_id()==$_GET['category']):?>selected<?php endif; ?>><?php echo $category_name; ?></option>                              
+                            <?php endif; ?>          
+                       <?php  endforeach; ?>
+                <?php endif;   ?>                    
+                    </select>                                 
+                                 
+                </li>
+            </ul>
+            <script type="text/javascript">decorateList('advanced-search-list')</script>
+        </fieldset>   
+         
+        <div class="button-set">
+            <button class="form-button" type="submit"><span><?php echo $this->__('Search') ?></span></button>            
+        </div>
+        </form>
+     </div>
+<script type="text/javascript">
+    var dataForm = new VarienForm('form-validate', true);
+	function checksearchform(searchform)
+	{ 
+		if(document.getElementById('width').value == '' && document.getElementById('depth').value == '' && document.getElementById('height').value == '' ) {
+			alert('Please select atleast one option to search.');
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
+  
+   
+</div>
+<!-- [ends] .cart-sidebar // -->

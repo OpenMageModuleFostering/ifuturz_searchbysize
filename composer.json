@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/Ifuturz_Searchbysize",
+    "type": "magento-module",
+    "license": "OSL-v3.0",
+    "homepage": "",
+    "description": "Search the product by size that is width, height, depth of the product along with the categories.",
+    "authors": [
+    {
+        "name": "Iverve",
+        "email": "extension.geek@ifuturz.com"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

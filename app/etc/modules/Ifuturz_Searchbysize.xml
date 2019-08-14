@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Ifuturz_Searchbysize>
+			<active>true</active>
+			<codePool>community</codePool>
+		</Ifuturz_Searchbysize>
+	</modules>
+</config>

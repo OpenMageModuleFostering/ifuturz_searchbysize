@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+			<action method="addCss"><stylesheet>css/searchbysize.css</stylesheet></action>
+		</reference>
+		<reference name="right">
+			<block type="catalogsearch/advanced_form" before="-" name="catalog_size_sidebar" template="searchbysize/advanced/searchbysize.phtml"/>
+		</reference>
+		
+	</default>
+</layout>

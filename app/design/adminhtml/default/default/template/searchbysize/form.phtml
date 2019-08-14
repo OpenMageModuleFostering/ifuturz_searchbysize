@@ -1,0 +1,126 @@
+<?php //echo $this->getFormHtml() ?>
+<div class="content-header">
+    <table cellspacing="0" class="grid-header">
+        <tr>
+            <td><h3><?=$this->__('Search By Size')?></h3></td>
+            <td class="a-right">
+			<button onclick="editForm.submit()" class="scalable save" type="button"><span>Save</span></button>
+            </td>
+        </tr>
+    </table>
+</div>
+<?php
+$read = Mage::getSingleton('core/resource')->getConnection('core_read');
+
+$model = Mage::getModel('catalog/product');
+$collection = $model->getCollection();
+$productids = $collection->getAllIds();
+
+$width = array();
+$depth = array();
+$height = array();
+$attids1= $read->query("Select attribute_id from eav_attribute where attribute_code='width'");	
+$attidrow1 = $attids1->fetch();
+$widthattid = $attidrow1['attribute_id'];
+
+$attids2= $read->query("Select attribute_id from eav_attribute where attribute_code='depth'");	
+$attidrow2 = $attids2->fetch();
+$depthattid = $attidrow2['attribute_id'];
+	
+$attids3= $read->query("Select attribute_id from eav_attribute where attribute_code='height'");	
+$attidrow3 = $attids3->fetch();
+$heightattid = $attidrow3['attribute_id'];
+
+foreach($productids as $id)
+{
+	
+	
+	$widthvalue = $read->query("Select value from catalog_product_entity_varchar where attribute_id='$widthattid' and entity_id='$id'");
+	$widthrow = $widthvalue->fetch();
+	if($widthrow['value']!='')
+	{
+		$width[] = $widthrow['value'];
+	}
+	
+	
+		
+	$depthvalue =$read->query("Select value from catalog_product_entity_varchar where attribute_id='$depthattid' and entity_id='$id'");
+	$depthrow = $depthvalue->fetch();
+	if($depthrow['value']!='')
+	{
+		$depth[] = $depthrow['value'];
+	}
+	
+	
+	$heightvalue =$read->query("Select value from catalog_product_entity_varchar where attribute_id='$heightattid' and entity_id='$id'");
+	$heightrow = $heightvalue->fetch();
+	if($heightrow['value']!='')
+	{
+		$height[] = $heightrow['value'];
+	}
+	
+}
+
+$ww =  array_unique($width);
+$dd =  array_unique($depth);
+$hh =  array_unique($height);
+
+sort($ww, SORT_NUMERIC);
+sort($dd, SORT_NUMERIC);
+sort($hh, SORT_NUMERIC); 
+?>
+<?php 
+$model = Mage::getModel('searchbysize/searchbysize')->getCollection();
+$temp = $model->getData();
+$width = $temp[0]['width'];
+$depth = $temp[0]['depth'];
+$height = $temp[0]['height'];
+
+$exwidth = explode(',',$width);
+$exdepth = explode(',',$depth);
+$exheight = explode(',',$height);
+
+
+?>
+
+<div class="entry-edit">
+    <form id="edit_form" name="edit_form" method="post" action="<?=$this->getUrl('*/*/save')?>">
+        <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+        <h4 class="icon-head head-edit-form fieldset-legend"><?=$this->__('Allowed Sizes')?></h4>
+        <fieldset id="my-fieldset">
+            <table cellspacing="0" class="form-list">
+                <tr>
+                   <td class="label" align="center"><?=$this->__('Width')?> <span class="required">*</span></td>
+                    <td><select name="width[]" size="10" multiple>
+                    	<!--<option value='' selected>-- Select Width --</option>-->
+                    	<?php foreach($ww as $w):?>
+                        <option value='<?php echo $w;?>'<?php if(in_array($w,$exwidth,true)):?>selected<?php endif; ?>><?php echo $w; ?></option>
+                         <?php endforeach; ?>
+                        </select>
+                    </td>
+				
+                   <td class="label" align="center"><?=$this->__('Depth')?> <span class="required">*</span></td>
+                    <td><select name="depth[]" size="10" multiple>
+                   		<!--<option value='' selected>-- Select Width --</option>-->
+                    	<?php foreach($dd as $d):?>
+                        <option value='<?php echo $d; ?>'<?php if(in_array($d,$exdepth,true)):?>//selected<?php endif; ?>><?php echo $d; ?></option>
+                         <?php endforeach; ?>
+                    </select>
+                    </td>
+				
+                   <td class="label" align="center"><?=$this->__('Height')?> <span class="required">*</span></td>
+                    <td><select name="height[]" size="10" multiple>
+                   		<!--<option value='' selected>-- Select Width --</option>-->
+                    	<?php foreach($hh as $h):?>
+                        <option value='<?php echo $h; ?>'<?php if(in_array($h,$exheight,true)):?>selected<?php endif; ?>><?php echo $h; ?></option>
+                         <?php endforeach; ?>
+                    </select>
+                    </td>
+				</tr>
+            </table>
+        </fieldset>
+    </form>
+</div>
+<script type="text/javascript">
+    var editForm = new varienForm('edit_form');
+</script>
