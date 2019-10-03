@@ -1,7 +1,7 @@
 {
-    "name": "OpenMageModuleFostering\/Ifuturz_Searchbysize",
+    "name": "openmage-module-fostering\/ifuturz_searchbysize",
     "type": "magento-module",
-    "license": "OSL-v3.0",
+    "license": "OSL-3.0",
     "homepage": "",
     "description": "Search the product by size that is width, height, depth of the product along with the categories.",
     "authors": [
